@@ -1,0 +1,29 @@
+package laFiore.demo.model;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.math.BigDecimal;
+
+@Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+public class VarianteJoia {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
+
+    private String dimensao;
+
+    private Integer estoque;
+
+    private BigDecimal preco;
+
+    @ManyToOne
+    @JoinColumn(name = "Joia_id")
+    private Joia joia;
+}
