@@ -1,5 +1,6 @@
 package laFiore.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,5 +26,6 @@ public class VarianteJoia {
 
     @ManyToOne
     @JoinColumn(name = "Joia_id")
+    @JsonIgnore
     private Joia joia;
 }

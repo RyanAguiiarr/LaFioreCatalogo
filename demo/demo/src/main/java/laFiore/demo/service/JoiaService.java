@@ -26,22 +26,20 @@ public class JoiaService {
         try{
             log.info("Iniciando cadastro da joia: {}", req.nome());
 
-            // 1. Validação de SKU (Já estava no caminho certo!)
             if (joiaRepository.findBySku(req.sku()).isPresent()) {
                 throw new Exception("Sku (" + req.sku() + ") já cadastrado!");
             }
 
-            // 2. Instanciar a Joia (Pai)
             Joia novaJoia = new Joia();
             novaJoia.setNome(req.nome());
             novaJoia.setSku(req.sku());
             novaJoia.setDescricao(req.descricao());
             novaJoia.setCategoria(req.categoria());
             novaJoia.setPreco(req.preco());
-            novaJoia.setAtivo(true); // Geralmente começa ativa
+            novaJoia.setAtivo(true);
             novaJoia.setImagensUrl(req.imagenUrl());
+            novaJoia.setDataCriacao(LocalDateTime.now());
 
-            // 3. Tratar as Variantes e o Estoque
             int estoqueTotal = 0;
 
             if (req.variantes() != null && !req.variantes().isEmpty()) {
@@ -68,8 +66,8 @@ public class JoiaService {
                     joiaSalva.getPreco(),
                     joiaSalva.getEstoque(),
                     joiaSalva.getAtivo(),
-                    joiaSalva.getImagensUrl(), // Note que no DTO você chamou de 'imagenUrl'
-                    joiaSalva.getDataCriacao(), // Note que no DTO você chamou de 'datacriacao'
+                    joiaSalva.getImagensUrl(),
+                    joiaSalva.getDataCriacao(),
                     joiaSalva.getUpdateTime(),
                     joiaSalva.getVariantes()
             );
