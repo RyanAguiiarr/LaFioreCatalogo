@@ -27,7 +27,7 @@ public class TokenService {
                     .setIssuer("la-fiore-api")
                     .setSubject(user.getLogin())
                     .setExpiration(genExpirationDate())
-                    .signWith(key, SignatureAlgorithm.ES256)
+                    .signWith(key, SignatureAlgorithm.HS256)
                     .compact();
 
         }catch (Exception ex){
